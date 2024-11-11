@@ -33,7 +33,7 @@ jobs:
       #max-parallel: 3
       matrix:
         TARGET: [IPQ60XX-WIFI-NO_RE-CS-07_SSRP-MOSDNS]
-        SOURCE: [LiBwrt-op/openwrt-6.x]
+        SOURCE: [coolsnowwolf/lede]
 
     #调用公用编译核心WRT-CORE_SSRP-MOSDNS.yml
     uses: ./.github/workflows/WRT-CORE_SSRP-MOSDNS.yml
@@ -43,13 +43,13 @@ jobs:
       #默认主题
       WRT_THEME: argon
       #默认主机名
-      WRT_NAME: OLiBWRT
+      WRT_NAME: LEDE
       #默认WIFI名
-      WRT_WIFI: OLiBWRT
+      WRT_WIFI: LEDE
       #默认地址
       WRT_IP: 192.168.1.1
       #默认密码，仅作提示，修改无用
-      WRT_PW: 无
+      WRT_PW: password
       #源码链接
       WRT_REPO: https://github.com/${{matrix.SOURCE}}.git
       #源码分支
