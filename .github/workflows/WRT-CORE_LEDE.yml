@@ -1,5 +1,5 @@
 #云编译公用核心
-name: WRT-CORE_SSRP-MOSDNS
+name: WRT-CORE_LEDE
 
 on:
   workflow_call:
