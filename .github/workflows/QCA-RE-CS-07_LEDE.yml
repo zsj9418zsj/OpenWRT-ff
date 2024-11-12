@@ -1,5 +1,5 @@
 #CI项目
-name: QCA-RE-CS-07_SSRP-MOSDNS
+name: QCA-RE-CS-07_LEDE
 
 #CI计划
 on:
