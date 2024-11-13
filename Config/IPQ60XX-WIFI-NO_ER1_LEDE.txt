@@ -76,14 +76,14 @@ CONFIG_MBEDTLS_NIST_KW_C=y
 CONFIG_MBEDTLS_RSA_NO_CRT=y
 
 # OpenVPN配置
-CONFIG_OPENVPN_openssl_ENABLE_DEF_AUTH=y
-CONFIG_OPENVPN_openssl_ENABLE_FRAGMENT=y
-CONFIG_OPENVPN_openssl_ENABLE_LZ4=y
-CONFIG_OPENVPN_openssl_ENABLE_LZO=y
-CONFIG_OPENVPN_openssl_ENABLE_MULTIHOME=y
-CONFIG_OPENVPN_openssl_ENABLE_PF=y
-CONFIG_OPENVPN_openssl_ENABLE_PORT_SHARE=y
-CONFIG_OPENVPN_openssl_ENABLE_SMALL=y
+#CONFIG_OPENVPN_openssl_ENABLE_DEF_AUTH=y
+#CONFIG_OPENVPN_openssl_ENABLE_FRAGMENT=y
+#CONFIG_OPENVPN_openssl_ENABLE_LZ4=y
+#CONFIG_OPENVPN_openssl_ENABLE_LZO=y
+#CONFIG_OPENVPN_openssl_ENABLE_MULTIHOME=y
+#CONFIG_OPENVPN_openssl_ENABLE_PF=y
+#CONFIG_OPENVPN_openssl_ENABLE_PORT_SHARE=y
+#CONFIG_OPENVPN_openssl_ENABLE_SMALL=y
 
 #Luci应用程序
 CONFIG_PACKAGE_luci-app-alist=y
@@ -93,7 +93,7 @@ CONFIG_PACKAGE_luci-app-diskman_INCLUDE_btrfs_progs=y
 CONFIG_PACKAGE_luci-app-diskman_INCLUDE_lsblk=y
 CONFIG_PACKAGE_luci-app-mosdns=y
 CONFIG_PACKAGE_luci-app-msd_lite=y
-CONFIG_PACKAGE_luci-app-openvpn-server=y
+#CONFIG_PACKAGE_luci-app-openvpn-server=y
 CONFIG_PACKAGE_luci-app-samba4=y
 CONFIG_PACKAGE_luci-app-ttyd=y
 CONFIG_PACKAGE_luci-app-zerotier=y
@@ -102,7 +102,7 @@ CONFIG_PACKAGE_luci-i18n-cpufreq-zh-cn=y
 CONFIG_PACKAGE_luci-i18n-diskman-zh-cn=y
 CONFIG_PACKAGE_luci-i18n-mosdns-zh-cn=y
 CONFIG_PACKAGE_luci-i18n-msd_lite-zh-cn=y
-CONFIG_PACKAGE_luci-i18n-openvpn-server-zh-cn=y
+#CONFIG_PACKAGE_luci-i18n-openvpn-server-zh-cn=y
 CONFIG_PACKAGE_luci-i18n-samba4-zh-cn=y
 CONFIG_PACKAGE_luci-i18n-ttyd-zh-cn=y
 CONFIG_PACKAGE_luci-i18n-zerotier-zh-cn=y
@@ -162,8 +162,8 @@ CONFIG_PACKAGE_libwebsockets-full=y
 CONFIG_PACKAGE_lsblk=y
 CONFIG_PACKAGE_mount-utils=y
 CONFIG_PACKAGE_msd_lite=y
-CONFIG_PACKAGE_openvpn-easy-rsa=y
-CONFIG_PACKAGE_openvpn-openssl=y
+#CONFIG_PACKAGE_openvpn-easy-rsa=y
+#CONFIG_PACKAGE_openvpn-openssl=y
 CONFIG_PACKAGE_parted=y
 CONFIG_PACKAGE_runc=y
 CONFIG_PACKAGE_samba4-libs=y
@@ -182,3 +182,9 @@ CONFIG_PACKAGE_v2ray-geoip=y
 CONFIG_PACKAGE_v2ray-geosite=y
 CONFIG_PACKAGE_wsdd2=y
 CONFIG_PACKAGE_zerotier=y
+
+# 移除模块
+# CONFIG_PACKAGE_TURBOACC_INCLUDE_NO_FASTPATH is not set
+# CONFIG_PACKAGE_luci-app-arpbind is not set
+# CONFIG_PACKAGE_luci-app-nlbwmon is not set
+
