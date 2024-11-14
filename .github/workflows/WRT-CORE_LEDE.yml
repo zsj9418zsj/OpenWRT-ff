@@ -241,8 +241,12 @@ jobs:
           body: |
             这是个平台固件包，内含1个ER1设备！
             请注意选择你需要的设备固件！
-            不要问，刷就完事了！
-            基于LEDE！!!
+            不要问，刷就完事了！基于LEDE！!!
+            
+            刷机方法: 
+            Hugo Uboot + 原厂CDT + 双分区GPT
+            Uboot 刷入squashfs-recovery.bin
+            Luci 刷入squashfs-sysupgrade.bin
 
             源码：${{env.WRT_REPO}}
             分支：${{env.WRT_BRANCH}}
