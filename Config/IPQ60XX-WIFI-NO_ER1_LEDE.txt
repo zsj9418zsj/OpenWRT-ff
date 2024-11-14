@@ -69,6 +69,8 @@ CONFIG_PACKAGE_luci-i18n-zerotier-zh-cn=y
 #主题配置
 CONFIG_PACKAGE_luci-theme-argon=y
 #LUCI依赖配置
+CONFIG_PACKAGE_TURBOACC_INCLUDE_SHORTCUT_FE_CM=y
+CONFIG_PACKAGE_alist=y
 CONFIG_PACKAGE_attr=y
 CONFIG_PACKAGE_autocore-arm=y
 CONFIG_PACKAGE_avahi-dbus-daemon=y
@@ -176,6 +178,8 @@ CONFIG_SAMBA4_SERVER_NETBIOS=y
 CONFIG_SAMBA4_SERVER_VFS=y
 CONFIG_SAMBA4_SERVER_WSDD2=y
 #移除软件包
+# CONFIG_PACKAGE_luci-app-rclone_INCLUDE_rclone-ng is not set
+# CONFIG_PACKAGE_luci-app-rclone_INCLUDE_rclone-webui is not set
 # CONFIG_PACKAGE_TURBOACC_INCLUDE_NO_FASTPATH is not set
 # CONFIG_PACKAGE_kmod-nf-conntrack-netlink is not set
 # CONFIG_PACKAGE_luci-app-accesscontrol is not set
