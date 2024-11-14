@@ -13,5 +13,7 @@ sed -i 's/services/network/g' $(find ./feeds/luci/applications/luci-app-upnp/ -t
 
 #修改默认IP地址
 sed -i "s/192\.168\.[0-9]*\.[0-9]*/$WRT_IP/g" ./package/base-files/files/bin/config_generate
+sed -i "s/192\.168\.[0-9]*\.[0-9]*/$WRT_IP/g" ./package/base-files/luci2/bin/config_generate
 #修改默认主机名
 sed -i "s/hostname='\(.*\)'/hostname='$WRT_NAME'/g" ./package/base-files/files/bin/config_generate
+sed -i "s/hostname='\(.*\)'/hostname='$WRT_NAME'/g" ./package/base-files/luci2/bin/config_generate
