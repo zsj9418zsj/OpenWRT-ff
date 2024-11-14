@@ -85,7 +85,7 @@ jobs:
       #默认密码，仅作提示，修改无用
       WRT_PW: ${{inputs.PASSWORD}}
       #源码链接
-      WRT_REPO: https://github.com/${{REPO.SOURCE}}.git
+      WRT_REPO: https://github.com/${{inputs.SOURCE}}.git
       #源码分支
       WRT_BRANCH: ${{inputs.BRANCH}}
       #源码名称
