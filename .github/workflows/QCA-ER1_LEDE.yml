@@ -20,6 +20,41 @@ on:
         default: 'false'
         required: false
         type: boolean
+      NAME:
+        description: '默认主机名'
+        default: 'LEDE'
+        required: false
+        type: string
+      THEME:
+        description: '默认主题'
+        default: 'argon'
+        required: false
+        type: string
+      WIFI:
+        description: '默认WIFI名'
+        default: 'LEDE'
+        required: false
+        type: string
+      IP:
+        description: '默认地址'
+        default: '192.168.1.1'
+        required: false
+        type: string
+      PASSWORD:
+        description: '默认密码，仅作提示，修改无用'
+        default: 'password'
+        required: false
+        type: string
+      SOURCE:
+        description: '源码名称'
+        default: 'coolsnowwolf/lede'
+        required: false
+        type: string
+      BRANCH:
+        description: '源码分支'
+        default: 'master'
+        required: false
+        type: string
 
 #CI权限
 permissions: write-all
@@ -33,7 +68,7 @@ jobs:
       #max-parallel: 3
       matrix:
         TARGET: [IPQ60XX-WIFI-NO_ER1_LEDE]
-        SOURCE: [coolsnowwolf/lede]
+        SOURCE: ${{matrix.TARGET}}
 
     #调用公用编译核心
     uses: ./.github/workflows/WRT-CORE_LEDE.yml
@@ -41,21 +76,21 @@ jobs:
       #编译平台
       WRT_TARGET: ${{matrix.TARGET}}
       #默认主题
-      WRT_THEME: argon
+      WRT_THEME: ${{inputs.THEME}}
       #默认主机名
-      WRT_NAME: LEDE
+      WRT_NAME: ${{inputs.NAME}}
       #默认WIFI名
-      WRT_WIFI: LEDE
+      WRT_WIFI: ${{inputs.WIFI}}
       #默认地址
-      WRT_IP: 192.168.1.1
+      WRT_IP: ${{inputs.IP}}
       #默认密码，仅作提示，修改无用
-      WRT_PW: password
+      WRT_PW: ${{inputs.PASSWORD}}
       #源码链接
-      WRT_REPO: https://github.com/${{matrix.SOURCE}}.git
+      WRT_REPO: https://github.com/${{REPO.SOURCE}}.git
       #源码分支
-      WRT_BRANCH: ${{matrix.BRANCH || 'master'}}
+      WRT_BRANCH: ${{inputs.BRANCH}}
       #源码名称
-      WRT_SOURCE: ${{matrix.SOURCE}}
+      WRT_SOURCE: ${{inputs.SOURCE}}
       #插件调整
       WRT_PACKAGE: ${{inputs.PACKAGE}}
       #仅输出配置文件
