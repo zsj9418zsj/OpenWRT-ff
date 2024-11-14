@@ -68,7 +68,6 @@ jobs:
       #max-parallel: 3
       matrix:
         TARGET: [IPQ60XX-WIFI-NO_ER1_LEDE]
-        SOURCE: ${{matrix.TARGET}}
 
     #调用公用编译核心
     uses: ./.github/workflows/WRT-CORE_LEDE.yml
