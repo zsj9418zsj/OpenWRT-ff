@@ -100,9 +100,9 @@ jobs:
           export WRT_CI=$(basename $GITHUB_WORKSPACE)
           export WRT_VER=$(echo $WRT_REPO | cut -d '/' -f 5-)-$WRT_BRANCH
           if [[ $WRT_REPO == *"lede"* ]]; then
-            export WRT_TYPE=$(sed -n "1{s/^#//;s/\r$//;p;q}" $GITHUB_WORKSPACE/Config/$WRT_TARGET_LEDE.txt)
+            export WRT_TYPE=$(sed -n "1{s/^#//;s/\r$//;p;q}" $GITHUB_WORKSPACE/Config/$WRT_TARGET-LEDE.txt)
           else
-            export WRT_TYPE=$(sed -n "1{s/^#//;s/\r$//;p;q}" $GITHUB_WORKSPACE/Config/$WRT_TARGET_IMM.txt)
+            export WRT_TYPE=$(sed -n "1{s/^#//;s/\r$//;p;q}" $GITHUB_WORKSPACE/Config/$WRT_TARGET-IMM.txt)
           fi
           echo "WRT_DATE=$WRT_DATE" >> $GITHUB_ENV
           echo "WRT_CI=$WRT_CI" >> $GITHUB_ENV
@@ -124,7 +124,7 @@ jobs:
         if: env.WRT_TEST != 'true'
         uses: actions/cache@main
         with:
-          key: ${{env.WRT_TARGET}}-${{env.WRT_NAME}}-${{env.WRT_VER}}-${{env.WRT_HASH}}
+          key: ${{env.WRT_TARGET}}-${{env.WRT_VER}}-${{env.WRT_HASH}}
           path: |
             ./wrt/.ccache
             ./wrt/staging_dir/host*
@@ -141,7 +141,7 @@ jobs:
           else
             gh extension install actions/gh-actions-cache
 
-            CACHE_LIST=$(gh actions-cache list --key "$WRT_TARGET-$WRT_NAME-$WRT_VER" | cut -f 1)
+            CACHE_LIST=$(gh actions-cache list --key "$WRT_TARGET-$WRT_VER" | cut -f 1)
             for CACHE_KEY in $CACHE_LIST; do
                gh actions-cache delete $CACHE_KEY --confirm
             done
@@ -169,9 +169,9 @@ jobs:
 
           rm -rf ./tmp* ./.config*
           if [[ $WRT_REPO == *"lede"* ]]; then
-            cat $GITHUB_WORKSPACE/Config/$WRT_TARGET_LEDE.txt $GITHUB_WORKSPACE/Config/GENERAL_LEDE.txt >> .config
+            cat $GITHUB_WORKSPACE/Config/$WRT_TARGET-LEDE.txt $GITHUB_WORKSPACE/Config/GENERAL-LEDE.txt >> .config
           else
-            cat $GITHUB_WORKSPACE/Config/$WRT_TARGET_IMM.txt $GITHUB_WORKSPACE/Config/GENERAL_IMM.txt >> .config
+            cat $GITHUB_WORKSPACE/Config/$WRT_TARGET-IMM.txt $GITHUB_WORKSPACE/Config/GENERAL-IMM.txt >> .config
           fi
 
           $GITHUB_WORKSPACE/Scripts/Settings.sh
@@ -208,7 +208,7 @@ jobs:
         run: |
           cd ./wrt/ && mkdir ./upload/
 
-          cp -f ./.config ./upload/Config_"$WRT_TARGET"_"$WRT_NAME"_"$WRT_VER"_"$WRT_DATE".txt
+          cp -f ./.config ./upload/Config_"$WRT_TARGET"_"$WRT_VER"_"$WRT_DATE".txt
 
           if [[ $WRT_TEST != 'true' ]]; then
             find ./bin/targets/ -iregex ".*\(buildinfo\|json\|manifest\|sha256sums\|packages\)$" -exec rm -rf {} +
@@ -217,7 +217,7 @@ jobs:
               for FILE in $(find ./bin/targets/ -type f -iname "*$TYPE*.*") ; do
                 EXT=$(basename $FILE | cut -d '.' -f 2-)
                 NAME=$(basename $FILE | cut -d '.' -f 1 | grep -io "\($TYPE\).*")
-                NEW_FILE="$WRT_NAME"_$WRT_VER"_"$NAME"_"$WRT_DATE"."$EXT"
+                NEW_FILE="$WRT_VER"_"$NAME"_"$WRT_DATE"."$EXT"
                 mv -f $FILE ./upload/$NEW_FILE
               done
             done
@@ -228,7 +228,7 @@ jobs:
       - name: Release Firmware
         uses: softprops/action-gh-release@master
         with:
-          tag_name: ${{env.WRT_TARGET}}_${{env.WRT_NAME}}_${{env.WRT_VER}}_${{env.WRT_DATE}}
+          tag_name: ${{env.WRT_TARGET}}_${{env.WRT_VER}}_${{env.WRT_DATE}}
           files: ./wrt/upload/*.*
           body: |
             不要问，刷就完事了！
