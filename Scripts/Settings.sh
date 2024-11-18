@@ -14,12 +14,29 @@ CFG_FILE="./package/base-files/files/bin/config_generate"
 sed -i "s/192\.168\.[0-9]*\.[0-9]*/$WRT_IP/g" $CFG_FILE
 #修改默认主机名
 sed -i "s/hostname='.*'/hostname='$WRT_NAME'/g" $CFG_FILE
+#调整位置
+sed -i 's/services/system/g' $(find ./feeds/luci/applications/luci-app-ttyd/ -type f -name "luci-app-ttyd.json")
+sed -i '3 a\\t\t"order": 10,' $(find ./feeds/luci/applications/luci-app-ttyd/ -type f -name "luci-app-ttyd.json")
+sed -i 's/services/network/g' $(find ./feeds/luci/applications/luci-app-upnp/ -type f -name "luci-app-upnp.json")
+
+if [[ $WRT_TARGET == *"lede"* ]]; then
+	sed -i 's/services/nas/g' $(find ./feeds/luci/applications/luci-app-samba4/ -type f -name "luci-app-samba4.json")
+fi
+
+# sed -i 's/services/nas/g' $(find ./feeds/luci/applications/luci-app-alist/ -type f -name "luci-app-alist.json")
+
+#LEDE平台调整
+if [[ $WRT_TARGET == *"lede"* ]]; then
+	CFG_FILE_LEDE="./package/base-files/luci2/bin/config_generate"
+	sed -i "s/192\.168\.[0-9]*\.[0-9]*/$WRT_IP/g" $CFG_FILE_LEDE
+	sed -i "s/hostname='.*'/hostname='$WRT_NAME'/g" $CFG_FILE_LEDE
+fi
 
 #配置文件修改
 echo "CONFIG_PACKAGE_luci=y" >> ./.config
 echo "CONFIG_LUCI_LANG_zh_Hans=y" >> ./.config
 echo "CONFIG_PACKAGE_luci-theme-$WRT_THEME=y" >> ./.config
-echo "CONFIG_PACKAGE_luci-app-$WRT_THEME-config=y" >> ./.config
+# echo "CONFIG_PACKAGE_luci-app-$WRT_THEME-config=y" >> ./.config
 
 #手动调整的插件
 if [ -n "$WRT_PACKAGE" ]; then
@@ -31,4 +48,6 @@ if [[ $WRT_TARGET == *"IPQ"* ]]; then
 	#取消nss相关feed
 	echo "CONFIG_FEED_nss_packages=n" >> ./.config
 	echo "CONFIG_FEED_sqm_scripts_nss=n" >> ./.config
+	echo "CONFIG_FEED_helloworld=n" >> ./.config
 fi
+
