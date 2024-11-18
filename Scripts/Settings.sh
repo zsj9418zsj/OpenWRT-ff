@@ -19,14 +19,14 @@ sed -i 's/services/system/g' $(find ./feeds/luci/applications/luci-app-ttyd/ -ty
 sed -i '3 a\\t\t"order": 10,' $(find ./feeds/luci/applications/luci-app-ttyd/ -type f -name "luci-app-ttyd.json")
 sed -i 's/services/network/g' $(find ./feeds/luci/applications/luci-app-upnp/ -type f -name "luci-app-upnp.json")
 
-if [[ $WRT_TARGET == *"lede"* ]]; then
+if [[ $WRT_REPO == *"lede"* ]]; then
 	sed -i 's/services/nas/g' $(find ./feeds/luci/applications/luci-app-samba4/ -type f -name "luci-app-samba4.json")
 fi
 
 # sed -i 's/services/nas/g' $(find ./feeds/luci/applications/luci-app-alist/ -type f -name "luci-app-alist.json")
 
 #LEDE平台调整
-if [[ $WRT_TARGET == *"lede"* ]]; then
+if [[ $WRT_REPO == *"lede"* ]]; then
 	CFG_FILE_LEDE="./package/base-files/luci2/bin/config_generate"
 	sed -i "s/192\.168\.[0-9]*\.[0-9]*/$WRT_IP/g" $CFG_FILE_LEDE
 	sed -i "s/hostname='.*'/hostname='$WRT_NAME'/g" $CFG_FILE_LEDE
