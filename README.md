@@ -26,7 +26,7 @@
 ## 刷机方法:
 ### LEDE:
     Hugo Uboot + 原厂CDT + 双分区GPT
-    Uboot 刷入squashfs-recovery.bin
+    Uboot 刷入squashfs-recovery.bin #第一次开机巨慢。
     Luci 刷入squashfs-sysupgrade.bin
 
 ### LibWRT&OWRT:
