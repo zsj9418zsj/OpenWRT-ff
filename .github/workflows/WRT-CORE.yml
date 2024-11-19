@@ -204,7 +204,7 @@ jobs:
         run: |
           cd ./wrt/ && mkdir ./upload/
 
-          cp -f ./.config ./upload/Config_"$WRT_TARGET"_"$WRT_VER"_"$WRT_DATE".txt
+          cp -f ./.config ./upload/Config_"$WRT_TARGET"_$WRT_NAME"_"$WRT_VER"_"$WRT_DATE".txt
 
           if [[ $WRT_TEST != 'true' ]]; then
             find ./bin/targets/ -iregex ".*\(buildinfo\|json\|manifest\|sha256sums\|packages\)$" -exec rm -rf {} +
@@ -213,7 +213,7 @@ jobs:
               for FILE in $(find ./bin/targets/ -type f -iname "*$TYPE*.*") ; do
                 EXT=$(basename $FILE | cut -d '.' -f 2-)
                 NAME=$(basename $FILE | cut -d '.' -f 1 | grep -io "\($TYPE\).*")
-                NEW_FILE="$WRT_VER"_"$NAME"_"$WRT_DATE"."$EXT"
+                NEW_FILE="$WRT_NAME"_"$WRT_VER"_"$NAME"_"$WRT_DATE"."$EXT"
                 mv -f $FILE ./upload/$NEW_FILE
               done
             done
@@ -224,7 +224,7 @@ jobs:
       - name: Release Firmware
         uses: softprops/action-gh-release@master
         with:
-          tag_name: ${{env.WRT_TARGET}}_${{env.WRT_VER}}_${{env.WRT_DATE}}
+          tag_name: ${{env.WRT_TARGET}}_${{env.WRT_NAME}}_${{env.WRT_VER}}_${{env.WRT_DATE}}
           files: ./wrt/upload/*.*
           body: |
             不要问，刷就完事了！
