@@ -20,6 +20,10 @@ on:
         default: 'main'
         required: true
         type: string
+      SUFFIX:
+        default: 'IMM'
+        required: true
+        type: string
       PACKAGE:
         required: false
         type: string
@@ -57,6 +61,8 @@ jobs:
       WRT_BRANCH: ${{inputs.BRANCH}}
       #源码名称
       WRT_SOURCE: ${{inputs.SOURCE}}
+      #后缀名称
+      WRT_SUFFIX: ${{matrix.REPO_INFO.SUFFIX}}
       #插件调整
       WRT_PACKAGE: ${{inputs.PACKAGE}}
       #仅输出配置文件

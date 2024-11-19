@@ -31,6 +31,9 @@ on:
       WRT_SOURCE:
         required: false
         type: string
+      WRT_SUFFIX:
+        required: true
+        type: string
       WRT_PACKAGE:
         required: false
         type: string
@@ -49,6 +52,7 @@ env:
   WRT_REPO: ${{inputs.WRT_REPO}}
   WRT_BRANCH: ${{inputs.WRT_BRANCH}}
   WRT_SOURCE: ${{inputs.WRT_SOURCE}}
+  WRT_SUFFIX: ${{inputs.WRT_SUFFIX}}
   WRT_PACKAGE: ${{inputs.WRT_PACKAGE}}
   WRT_TEST: ${{inputs.WRT_TEST}}
 
@@ -99,11 +103,7 @@ jobs:
           export WRT_DATE=$(TZ=UTC-8 date +"%y.%m.%d_%H.%M.%S")
           export WRT_CI=$(basename $GITHUB_WORKSPACE)
           export WRT_VER=$(echo $WRT_REPO | cut -d '/' -f 5-)-$WRT_BRANCH
-          if [[ $WRT_REPO == *"lede"* ]]; then
-            export WRT_TYPE=$(sed -n "1{s/^#//;s/\r$//;p;q}" $GITHUB_WORKSPACE/Config/$WRT_TARGET-LEDE.txt)
-          else
-            export WRT_TYPE=$(sed -n "1{s/^#//;s/\r$//;p;q}" $GITHUB_WORKSPACE/Config/$WRT_TARGET-IMM.txt)
-          fi
+          export WRT_TYPE=$(sed -n "1{s/^#//;s/\r$//;p;q}" $GITHUB_WORKSPACE/Config/$WRT_TARGET-$WRT_SUFFIX.txt)
           echo "WRT_DATE=$WRT_DATE" >> $GITHUB_ENV
           echo "WRT_CI=$WRT_CI" >> $GITHUB_ENV
           echo "WRT_VER=$WRT_VER" >> $GITHUB_ENV
@@ -168,11 +168,7 @@ jobs:
           cd ./wrt/
 
           rm -rf ./tmp* ./.config*
-          if [[ $WRT_REPO == *"lede"* ]]; then
-            cat $GITHUB_WORKSPACE/Config/$WRT_TARGET-LEDE.txt $GITHUB_WORKSPACE/Config/GENERAL-LEDE.txt >> .config
-          else
-            cat $GITHUB_WORKSPACE/Config/$WRT_TARGET-IMM.txt $GITHUB_WORKSPACE/Config/GENERAL-IMM.txt >> .config
-          fi
+          cat $GITHUB_WORKSPACE/Config/$WRT_TARGET-$WRT_SUFFIX.txt $GITHUB_WORKSPACE/Config/GENERAL-$WRT_SUFFIX.txt >> .config
 
           $GITHUB_WORKSPACE/Scripts/Settings.sh
 
