@@ -17,9 +17,10 @@
     带NSS的6.6内核固件，默认主题为Argon；默认使用nftables防火墙（fw4）。
     默认管理地址：192.168.1.1 默认用户：root 默认密码：无
 ### LEDE: 
-~~带NSS的6.1内核固件，默认主题为Argon；默认使用nftables防火墙（fw4）,不兼容QCA-NSS-ECM报错!~~
-
     带NSS的6.1内核固件，默认主题为Argon；默认使用iptable防火墙（fw3）。
+    默认管理地址：192.168.1.1 默认用户：root 默认密码：password
+### LEDE-FW4:    
+    带NSS的6.1内核固件，默认主题为Argon；默认使用nftables防火墙（fw4）。
     默认管理地址：192.168.1.1 默认用户：root 默认密码：password
 
 ## 刷机方法:
@@ -38,7 +39,7 @@
     
     ```
     CONFIG_PACKAGE_luci-app-ssr-plus=y // LEDE
-    CONFIG_PACKAGE_luci-app-homeproxy=y // OWRT|LIBWRT
+    CONFIG_PACKAGE_luci-app-homeproxy=y // OWRT|LIBWRT|LEDE-FW4
     CONFIG_PACKAGE_luci-app-advancedplus=y
     CONFIG_PACKAGE_luci-app-alist=y
     CONFIG_PACKAGE_luci-app-cpufreq=y
@@ -50,8 +51,8 @@
     CONFIG_PACKAGE_luci-app-openvpn-server=y
     CONFIG_PACKAGE_luci-app-samba4=y
     CONFIG_PACKAGE_luci-app-socat=y
-    CONFIG_PACKAGE_luci-app-sqm=y
     CONFIG_PACKAGE_luci-app-ttyd=y
+    CONFIG_PACKAGE_luci-app-turboacc=y
     CONFIG_PACKAGE_luci-app-wolplus=y
     CONFIG_PACKAGE_luci-app-zerotier=y
     CONFIG_PACKAGE_luci-theme-argon=y
