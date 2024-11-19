@@ -1,7 +1,5 @@
 #!/bin/bash
 
-WRT_PATCH="$GITHUB_WORKSPACE/wrt/"
-
 #安装和更新软件包
 UPDATE_PACKAGE() {
 	local PKG_NAME=$1
