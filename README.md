@@ -2,12 +2,15 @@
 京东云ER1 (设备型号: qualcommax_ipq60xx_DEVICE_jdcloud_re-cs-07)
 
 ## 云编译OpenWRT固件
+[![QCA-ALL](https://github.com/ftkey/OpenWRT-CI/actions/workflows/QCA-ALL.yml/badge.svg)](https://github.com/ftkey/OpenWRT-CI/actions/workflows/QCA-ALL.yml)
 
-### 高通版(NSS)
+### 高通版(NSS) 
     OWRT: https://github.com/VIKINGYFY/immortalwrt.git 
     LibWRT: https://github.com/LiBwrt-op/openwrt-6.x.git 
     ImmortalWRT: https://github.com/immortalwrt/immortalwrt.git 
     LEDE: https://github.com/coolsnowwolf/lede.git 
+    
+
 
 ## 编译时间
 固件自动每天早上4点自动编译
