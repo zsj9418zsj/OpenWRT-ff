@@ -58,7 +58,7 @@ env:
 
 jobs:
   core:
-    name: ${{inputs.WRT_SOURCE}}
+    name: ${{inputs.WRT_SOURCE}} - (${{inputs.WRT_NAME}})
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout Projects
