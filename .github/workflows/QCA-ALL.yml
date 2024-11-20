@@ -27,7 +27,7 @@ permissions: write-all
 #CI任务
 jobs:
   config:
-    name: ${{matrix.TARGET}}(${{matrix.REPO_INFO.NAME}})
+    name: ${{matrix.TARGET}}
     strategy:
       fail-fast: false
       #max-parallel: 2
