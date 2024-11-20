@@ -168,7 +168,7 @@ jobs:
           cd ./wrt/
 
           rm -rf ./tmp* ./.config*
-          cat $GITHUB_WORKSPACE/Config/$WRT_TARGET-$WRT_SUFFIX.txt $GITHUB_WORKSPACE/Config/GENERAL-$WRT_SUFFIX.txt >> .config
+          cat $GITHUB_WORKSPACE/Config/GENERAL.txt $GITHUB_WORKSPACE/Config/$WRT_TARGET-$WRT_SUFFIX.txt >> .config
 
           $GITHUB_WORKSPACE/Scripts/Settings.sh
 
