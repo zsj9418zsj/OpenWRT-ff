@@ -1,9 +1,15 @@
 name: Auto-Clean
+# on:
+ # workflow_dispatch:  # 手动触发：通过 GitHub UI 来触发
+ # schedule:
+ #  - cron: 0 18 * * 4  # 北京时间星期五凌晨2点，定时触发
+
+
 
 on:
-  #自动清理：每天早上4点
+  #自动清理：每天早上2点
   schedule:
-    - cron: 0 20 * * *
+    - cron: 0 18 * * 4  # 北京时间星期五凌晨2点，定时触发
   #手动清理
   workflow_dispatch:
     inputs:
