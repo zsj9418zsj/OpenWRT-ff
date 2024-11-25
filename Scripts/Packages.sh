@@ -1,4 +1,14 @@
 #!/bin/bash
+# 修改默认IP & 固件名称
+sed -i 's/192.168.1.1/192.168.3.18/g' package/base-files/files/bin/config_generate
+sed -i "s/hostname='.*'/hostname='JDCAX1800'/g" package/base-files/files/bin/config_generate
+# 移除要替换的包
+rm -rf feeds/packages/net/alist
+rm -rf feeds/luci/applications/luci-app-alist
+rm -rf feeds/packages/net/adguardhome
+rm -rf feeds/packages/net/ariang
+rm -rf package/emortal/luci-app-athena-led
+rm -rf feeds/packages/utils/watchcat
 
 #安装和更新软件包
 UPDATE_PACKAGE() {
@@ -26,6 +36,7 @@ UPDATE_PACKAGE "argon" "jerrykuku/luci-theme-argon" "master"
 
 UPDATE_PACKAGE "homeproxy" "VIKINGYFY/homeproxy" "main"
 # UPDATE_PACKAGE "mihomo" "morytyann/OpenWrt-mihomo" "main"
+UPDATE_PACKAGE "luci-app-watchcat-plus" "MilesPoupart/luci-app-watchcat-plus" "main"
 # UPDATE_PACKAGE "nekoclash" "Thaolga/luci-app-nekoclash" "main"
 # UPDATE_PACKAGE "openclash" "vernesong/OpenClash" "dev" "pkg"
 UPDATE_PACKAGE "passwall" "xiaorouji/openwrt-passwall" "main" "pkg"
@@ -40,6 +51,14 @@ UPDATE_PACKAGE "luci-app-advancedplus" "VIKINGYFY/packages" "main" "pkg"
 UPDATE_PACKAGE "luci-app-gecoosac" "lwb1978/openwrt-gecoosac" "main"
 UPDATE_PACKAGE "luci-app-tailscale" "asvow/luci-app-tailscale" "main"
 UPDATE_PACKAGE "luci-app-wolplus" "VIKINGYFY/packages" "main" "pkg"
+# 添加iStore商店
+UPDATE_PACKAGE "nas-packages" "linkease/nas-packages" "master"
+UPDATE_PACKAGE "nas-packages-luci" "linkease/nas-packages-luci" "main"
+# 添加alist网盘
+UPDATE_PACKAGE "luci-app-alist" "sbwml/luci-app-alist" "main"
+# 添加lucky大吉
+rm -rf package/lucky
+git clone  https://github.com/gdy666/luci-app-lucky.git package/lucky
 
 if [[ $WRT_REPO != *"immortalwrt"* ]]; then
 	UPDATE_PACKAGE "qmi-wwan" "immortalwrt/wwan-packages" "master" "pkg"
@@ -82,3 +101,6 @@ UPDATE_VERSION() {
 #UPDATE_VERSION "软件包名" "测试版，true，可选，默认为否"
 UPDATE_VERSION "sing-box"
 UPDATE_VERSION "tailscale"
+UPDATE_VERSION "alist"
+#修复Openvpnserver一键生成证书
+UPDATE_VERSION "openvpn-easy-rsa" 
